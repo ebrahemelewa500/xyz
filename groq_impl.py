@@ -209,9 +209,7 @@ def create_folders_and_files(current_path: str, structure: dict, code_blocks: li
         code_blocks (list): List of code blocks with filenames.
     """
     for key, value in structure.items():
-        st.write(key)
         path = os.path.join(current_path, key)
-        st.write(path)
         if isinstance(value, dict):
             try:
                 os.makedirs(path, exist_ok=True)
@@ -219,19 +217,13 @@ def create_folders_and_files(current_path: str, structure: dict, code_blocks: li
             except OSError as e:
                 print(e)
         else:
-            st.write("code_blocks")
-            st.write(code_blocks)
             code_content = next((code for file, code in code_blocks if file == key), None)
             if code_content:
                 try:
                     with open(path, 'w') as file:
                         file.write(code_content)
-                    # console.print(Panel(f"Created file: [bold]{path}[/bold]", title="[bold green]File Creation[/bold green]", title_align="left", border_style="green"))
                 except IOError as e:
                     print(e)
-                    # console.print(Panel(f"Error creating file: [bold]{path}[/bold]\nError: {e}", title="[bold red]File Creation Error[/bold red]", title_align="left", border_style="red"))
-            # else:
-                # console.print(Panel(f"Code content not found for file: [bold]{key}[/bold]", title="[bold yellow]Missing Code Content[/bold yellow]", title_align="left", border_style="yellow"))
 
 
 # "haiku" ---> refers to junior_sub_agent.
